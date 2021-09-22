@@ -19,11 +19,12 @@ export class App extends Component {
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
-    
+
     if (parsedContacts) {
       this.setState({
-        contacts: parsedContacts
-    })}
+        contacts: parsedContacts,
+      });
+    }
   }
 
   componentDidUpdate(_, prevState) {
@@ -34,9 +35,11 @@ export class App extends Component {
     }
   }
 
+  // is alredy in contacts
+
   formSubmitHandler = ({ name, number }) => {
     this.onCheckUniqueName(name)
-      ? alert(`${name} is alredy in contacts.`)
+      ? alert(`${name} HELLO WORLD.`)
       : this.setState(({ contacts }) => ({
           contacts: [
             {
