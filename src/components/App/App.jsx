@@ -6,7 +6,18 @@ import { Filter } from 'components/Filter/Filter';
 import { Container, AppTitle } from './App.styled';
 
 export function App() {
-  const [contacts, setContacts] = useState(() => JSON.parse(localStorage.getItem('contacts')));
+  const defaultContacts = [
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    { id: 'id-5', name: 'Baraq Obama', number: '342-34-22' },
+    { id: 'id-6', name: 'John Veek', number: '456-45-64' },
+    { id: 'id-7', name: 'Gerald Wicher', number: '666-66-66' },
+  ];
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) || defaultContacts,
+  );
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -49,11 +60,12 @@ export function App() {
       <AppTitle>Phonebook</AppTitle>
       <ContactForm onSubmit={formSubmitHandler} />
       <Filter onGetValue={filterUpdateHandler} />
-      {!filter ? (
-        <ContactList title="Contacts" contacts={contacts} onDelete={onDeleteContact} />
-      ) : (
-        <ContactList title="Searched contacts" contacts={filterContactsHandler()} />
-      )}
+      {contacts.length > 0 &&
+        (!filter ? (
+          <ContactList title="Contacts" contacts={contacts} onDelete={onDeleteContact} />
+        ) : (
+          <ContactList title="Searched contacts" contacts={filterContactsHandler()} />
+        ))}
     </Container>
   );
 }
