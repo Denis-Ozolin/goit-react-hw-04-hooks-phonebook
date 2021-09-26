@@ -37,10 +37,6 @@ export function App() {
         ]);
   };
 
-  const filterUpdateHandler = data => {
-    setFilter(data);
-  };
-
   const onCheckUniqueName = value => {
     return contacts.find(({ name }) => name === value);
   };
@@ -59,7 +55,7 @@ export function App() {
     <Container>
       <AppTitle>Phonebook</AppTitle>
       <ContactForm onSubmit={formSubmitHandler} />
-      <Filter onGetValue={filterUpdateHandler} />
+      <Filter onGetValue={setFilter} />
       {contacts.length > 0 &&
         (!filter ? (
           <ContactList title="Contacts" contacts={contacts} onDelete={onDeleteContact} />
